@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
   const page = Number(searchParams.get("page")) || 1
-  const limit = Number(searchParams.get("limit")) || 12
+  const limit = Number(searchParams.get("limit")) || 8
   const search = searchParams.get("search") || ""
   const sort = searchParams.get("sort") || ""
   const issue = searchParams.get("issue") || ""
@@ -21,11 +21,13 @@ export async function GET(req: NextRequest) {
   }
 
   // FILTER
-  if (issue) {
-    data = data.filter((p) =>
-      p.medical_issue.toLowerCase() === issue.toLowerCase()
-    )
-  }
+ if (issue) {
+  const issues = issue.split(",").map(i => i.toLowerCase())
+
+  data = data.filter((p) =>
+    issues.includes(p.medical_issue.toLowerCase())
+  )
+}
 
   // SORT
   if (sort === "age") {
@@ -50,4 +52,6 @@ export async function GET(req: NextRequest) {
     page,
     limit
   })
+
+  
 }

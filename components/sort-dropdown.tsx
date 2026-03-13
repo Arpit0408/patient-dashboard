@@ -9,17 +9,16 @@ interface Props {
 export default function SortDropdown({ onSort }: Props) {
 
   return (
-    <Select onValueChange={onSort}>
+<Select onValueChange={onSort}>
+  <SelectTrigger className="w-[140px] border border-[#8F8F8F] rounded-[5px]">
+    <SelectValue placeholder="option 1" />
+  </SelectTrigger>
 
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Sort By" />
-      </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="name">Name</SelectItem>
+    <SelectItem value="age">Age</SelectItem>
+  </SelectContent>
+</Select>
 
-      <SelectContent>
-        <SelectItem value="name">Name</SelectItem>
-        <SelectItem value="age">Age</SelectItem>
-      </SelectContent>
-
-    </Select>
   )
 }

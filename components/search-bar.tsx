@@ -20,20 +20,19 @@ export default function SearchBar({ onSearch }: Props) {
 
     debounceRef.current = setTimeout(() => {
       onSearch(value)
-    }, 500) 
-
-
-    useEffect(() => {
-  return () => {
-    if (debounceRef.current) clearTimeout(debounceRef.current)
+    }, 500)
   }
-}, [])
-  }
+
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current)
+    }
+  }, [])
 
   return (
     <Input
-      placeholder="Search patients..."
-      className="max-w-md"
+      placeholder="Search..."
+      className="w-full border border-[#8F8F8F] rounded-[5px]"
       onChange={handleChange}
     />
   )
